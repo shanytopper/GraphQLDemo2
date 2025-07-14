@@ -16,7 +16,8 @@ builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
-    .AddTypeModule<JsonTypeModule>(_ => module);
+    .AddTypeModule<JsonTypeModule>(_ => module)
+    .AddApolloFederation();
 
 var app = builder.Build();
 

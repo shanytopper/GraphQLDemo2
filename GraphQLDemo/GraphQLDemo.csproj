@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="15.0.0-rc.3" />
+    <PackageReference Include="HotChocolate.ApolloFederation" Version="15.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4" />
   </ItemGroup>
 

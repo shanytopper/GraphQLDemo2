@@ -11,7 +11,8 @@ builder.Services.AddSingleton<BookRepository>();
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddApolloFederation();
 
 var app = builder.Build();
 
