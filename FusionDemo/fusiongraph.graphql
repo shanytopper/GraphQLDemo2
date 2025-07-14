@@ -1,0 +1,7 @@
+# Fusion configuration for combining Books and Authors graphs.
+
+schema @core(feature: "https://chillicream.com/fusion/v1.0")
+  @compose(subgraphs: [
+    { name: "books", url: "http://localhost:5283/graphql" },
+    { name: "authors", url: "http://localhost:5284/graphql" }
+  ])
