@@ -2,15 +2,24 @@
   {
     "name": "AuthorInfo",
     "fields": [
-      { "name": "nickname", "type": "String" },
-      { "name": "bio", "type": "String" }
+      {
+        "name": "nickname",
+        "type": "String"
+      },
+      {
+        "name": "bio",
+        "type": "String"
+      }
     ],
     "extension": false
   },
   {
     "name": "Query",
     "fields": [
-      { "name": "authorInfo", "type": "AuthorInfo" }
+      {
+        "name": "authorInfo",
+        "type": "AuthorInfo"
+      }
     ],
     "extension": true
   }
