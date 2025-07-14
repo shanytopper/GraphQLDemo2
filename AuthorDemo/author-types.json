@@ -1,0 +1,7 @@
+[
+  {
+    "name": "AuthorInfo",
+    "fields": ["nickname", "bio"],
+    "extension": false
+  }
+]

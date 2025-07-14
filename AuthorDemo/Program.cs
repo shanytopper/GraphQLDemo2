@@ -1,4 +1,5 @@
 using AuthorDemo;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,8 @@ builder.Services.AddSingleton<AuthorRepository>();
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddTypeModule(new JsonTypeModule(Path.Combine(builder.Environment.ContentRootPath, "author-types.json")));
 
 var app = builder.Build();
 
