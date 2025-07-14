@@ -13,7 +13,7 @@ builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
-    .AddTypeModule(new JsonTypeModule(Path.Combine(builder.Environment.ContentRootPath, "author-types.json")));
+    .AddTypeModule<JsonTypeModule>(_ => new JsonTypeModule(System.IO.Path.Combine(builder.Environment.ContentRootPath, "author-types.json")));
 
 var app = builder.Build();
 
