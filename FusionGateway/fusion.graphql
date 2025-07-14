@@ -1,5 +1,0 @@
-extend schema
-  @fusiongraph(version: 1, subgraphs: [
-    { name: "books", url: "http://localhost:5283/graphql" },
-    { name: "authors", url: "http://localhost:5284/graphql" }
-  ])
