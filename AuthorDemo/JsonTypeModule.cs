@@ -32,19 +32,39 @@ public class JsonTypeModule : ITypeModule
 
         foreach (var type in json.RootElement.EnumerateArray())
         {
-            var typeDefinition = new ObjectTypeDefinition(type.GetProperty("name").GetString()!);
+            var name = type.GetProperty("name").GetString()!;
+            var isExtension = type.GetProperty("extension").GetBoolean();
+
+            var typeDefinition = new ObjectTypeDefinition(name);
 
             foreach (var field in type.GetProperty("fields").EnumerateArray())
             {
-                typeDefinition.Fields.Add(
-                    new ObjectFieldDefinition(
-                        field.GetString()!,
-                        type: TypeReference.Parse("String!"),
-                        pureResolver: ctx => "foo"));
+                string fieldName;
+                string fieldType = "String";
+
+                if (field.ValueKind == JsonValueKind.String)
+                {
+                    fieldName = field.GetString()!;
+                }
+                else
+                {
+                    fieldName = field.GetProperty("name").GetString()!;
+                    if (field.TryGetProperty("type", out var typeProp))
+                    {
+                        fieldType = typeProp.GetString()!;
+                    }
+                }
+
+                var fieldDefinition = new ObjectFieldDefinition(
+                    fieldName,
+                    type: TypeReference.Parse(fieldType),
+                    pureResolver: (isExtension && name == "Query") ? ctx => new object() : ctx => "foo");
+
+                typeDefinition.Fields.Add(fieldDefinition);
             }
 
             types.Add(
-                type.GetProperty("extension").GetBoolean()
+                isExtension
                     ? ObjectTypeExtension.CreateUnsafe(typeDefinition)
                     : ObjectType.CreateUnsafe(typeDefinition));
         }
