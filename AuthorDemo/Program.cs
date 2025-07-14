@@ -9,11 +9,13 @@ builder.Services.AddControllers();
 
 // GraphQL services
 builder.Services.AddSingleton<AuthorRepository>();
+var module = new JsonTypeModule(Path.Combine(builder.Environment.ContentRootPath, "author-types.json"));
+builder.Services.AddSingleton(module);
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
-    .AddTypeModule<JsonTypeModule>(_ => new JsonTypeModule(System.IO.Path.Combine(builder.Environment.ContentRootPath, "author-types.json")));
+    .AddTypeModule<JsonTypeModule>(_ => module);
 
 var app = builder.Build();
 

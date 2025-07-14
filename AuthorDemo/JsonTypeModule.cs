@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
 using HotChocolate.Execution.Configuration;
@@ -70,5 +72,45 @@ public class JsonTypeModule : ITypeModule
         }
 
         return types;
+    }
+
+    public async Task AddFieldAsync(string typeName, string fieldName, string fieldType = "String")
+    {
+        JsonArray root;
+        if (File.Exists(_file))
+        {
+            var json = await File.ReadAllTextAsync(_file);
+            root = JsonNode.Parse(json)?.AsArray() ?? new JsonArray();
+        }
+        else
+        {
+            root = new JsonArray();
+        }
+
+        var typeObj = root.OfType<JsonObject>().FirstOrDefault(t =>
+            string.Equals(t["name"]?.ToString(), typeName, StringComparison.OrdinalIgnoreCase));
+
+        if (typeObj is null)
+        {
+            typeObj = new JsonObject
+            {
+                ["name"] = typeName,
+                ["fields"] = new JsonArray(),
+                ["extension"] = false
+            };
+            root.Add(typeObj);
+        }
+
+        var fields = typeObj["fields"]?.AsArray() ?? new JsonArray();
+        fields.Add(new JsonObject
+        {
+            ["name"] = fieldName,
+            ["type"] = fieldType
+        });
+        typeObj["fields"] = fields;
+
+        await File.WriteAllTextAsync(_file, root.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+
+        TypesChanged?.Invoke(this, EventArgs.Empty);
     }
 }
