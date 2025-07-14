@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLDemo", "GraphQLDemo\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorDemo", "AuthorDemo\AuthorDemo.csproj", "{D49D5DED-4C17-407D-81ED-65A1AFE7A605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionDemo", "FusionDemo\FusionDemo.csproj", "{B6D25924-18A2-4D28-8602-71432B99F3E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D49D5DED-4C17-407D-81ED-65A1AFE7A605}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D49D5DED-4C17-407D-81ED-65A1AFE7A605}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D49D5DED-4C17-407D-81ED-65A1AFE7A605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D25924-18A2-4D28-8602-71432B99F3E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D25924-18A2-4D28-8602-71432B99F3E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D25924-18A2-4D28-8602-71432B99F3E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D25924-18A2-4D28-8602-71432B99F3E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
